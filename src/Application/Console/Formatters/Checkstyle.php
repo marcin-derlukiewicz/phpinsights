@@ -66,7 +66,9 @@ final class Checkstyle implements Formatter
                     $error = $file->addChild('error');
                     $error->addAttribute('severity', 'error');
                     $error->addAttribute('source', str_replace('\\', '.', $insight->getInsightClass()));
-                    $error->addAttribute('line', $detail->hasLine() ? (string) $detail->getLine() : '');
+                    if ($detail->hasLine()) {
+                        $error->addAttribute('line', (string) $detail->getLine());
+                    }
                     $error->addAttribute('message', $detail->hasMessage() ? $detail->getMessage() : $insight->getTitle());
                 }
             }
